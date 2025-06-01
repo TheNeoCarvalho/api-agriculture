@@ -24,7 +24,7 @@ export class SeasonService {
     async findOne(id: string): Promise<Season> {
         const season = await this.seasonRepository.findOneBy({ id });
         if (!season) {
-            throw new NotFoundException(`Season with ID ${id} not found`);
+            throw new NotFoundException(`Season com id: ${id} não encontrado`);
         }
         return season;
     }

@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common'
 import { PlotService } from '../services/plot.service';
 import { CreatePlotDto } from '../dto/create-plot.dto';
 import { UpdatePlotDto } from '../dto/update-plot.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('plots')
+@ApiTags('Plots')
 export class PlotController {
     constructor(private readonly plotService: PlotService) { }
 

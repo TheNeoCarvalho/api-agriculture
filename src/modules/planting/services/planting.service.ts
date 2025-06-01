@@ -26,13 +26,13 @@ export class PlantingService {
 
     async create(dto: CreatePlantingDto): Promise<Planting> {
         const plot = await this.plotRepository.findOne({ where: { id: dto.plotId } });
-        if (!plot) throw new NotFoundException('Plot not found');
+        if (!plot) throw new NotFoundException('Plot não encontrado');
 
         const crop = await this.cropRepository.findOne({ where: { id: dto.cropId } });
-        if (!crop) throw new NotFoundException('Crop not found');
+        if (!crop) throw new NotFoundException('Crop não encontrado');
 
         const season = await this.seasonRepository.findOne({ where: { id: dto.seasonId } });
-        if (!season) throw new NotFoundException('Season not found');
+        if (!season) throw new NotFoundException('Season não encontrado');
 
         const planting = this.plantingRepository.create({
             plot,
@@ -50,7 +50,7 @@ export class PlantingService {
 
     async findOne(id: string): Promise<Planting> {
         const planting = await this.plantingRepository.findOne({ where: { id } });
-        if (!planting) throw new NotFoundException('Planting not found');
+        if (!planting) throw new NotFoundException('Planting não encontrado');
         return planting;
     }
 
@@ -59,19 +59,19 @@ export class PlantingService {
 
         if (dto.plotId) {
             const plot = await this.plotRepository.findOne({ where: { id: dto.plotId } });
-            if (!plot) throw new NotFoundException('Plot not found');
+            if (!plot) throw new NotFoundException('Plot não encontrado');
             planting.plot = plot;
         }
 
         if (dto.cropId) {
             const crop = await this.cropRepository.findOne({ where: { id: dto.cropId } });
-            if (!crop) throw new NotFoundException('Crop not found');
+            if (!crop) throw new NotFoundException('Crop não encontrado');
             planting.crop = crop;
         }
 
         if (dto.seasonId) {
             const season = await this.seasonRepository.findOne({ where: { id: dto.seasonId } });
-            if (!season) throw new NotFoundException('Season not found');
+            if (!season) throw new NotFoundException('Season não encontrado');
             planting.season = season;
         }
 

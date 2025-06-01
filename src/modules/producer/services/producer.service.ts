@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Producer } from '../entities/producer.entity';
@@ -13,6 +13,11 @@ export class ProducerService {
     ) { }
 
     async create(dto: CreateProducerDto): Promise<Producer> {
+        const existingProducer = await this.producerRepository.findOne({ where: { document: dto.document } });
+        if (existingProducer) {
+            throw new BadRequestException('Produtor já cadastrado');
+        }
+
         const producer = this.producerRepository.create(dto);
         return this.producerRepository.save(producer);
     }
@@ -23,7 +28,7 @@ export class ProducerService {
 
     async findOne(id: string): Promise<Producer> {
         const producer = await this.producerRepository.findOne({ where: { id } });
-        if (!producer) throw new NotFoundException('Producer not found');
+        if (!producer) throw new NotFoundException('Produtor não encontrado');
         return producer;
     }
 

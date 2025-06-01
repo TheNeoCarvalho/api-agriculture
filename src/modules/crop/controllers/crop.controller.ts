@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/commo
 import { CropService } from '../services/crop.service';
 import { CreateCropDto } from '../dto/create-crop.dto';
 import { UpdateCropDto } from '../dto/update-crop.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('crops')
+@ApiTags('Crops')
 export class CropController {
     constructor(private readonly cropService: CropService) { }
 

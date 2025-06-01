@@ -10,8 +10,10 @@ import {
 import { PlantingService } from '../services/planting.service';
 import { CreatePlantingDto } from '../dto/create-planting.dto';
 import { UpdatePlantingDto } from '../dto/update-planting.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('plantings')
+@ApiTags('Plantings')
 export class PlantingController {
     constructor(private readonly service: PlantingService) { }
 

@@ -8,13 +8,16 @@ import {
 import { Property } from '../../property/entities/property.entity';
 import { Season } from '../../season/entities/season.entity';
 import { Planting } from '../../planting/entities/planting.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('crops')
 export class Crop {
     @PrimaryGeneratedColumn('uuid')
+    @ApiProperty({ description: 'The unique identifier of the crop' })
     id: string;
 
     @Column()
+    @ApiProperty({ description: 'The name of the crop' })
     name: string;
 
     @ManyToOne(() => Property, (property) => property.crops)
