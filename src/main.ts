@@ -11,7 +11,7 @@ async function bootstrap() {
   ));
 
   const config = new DocumentBuilder()
-    .setTitle('Agriculture API')
+    .setTitle('API - Agricultor')
     .setDescription('API para gestão de produtores rurais')
     .setVersion('1.0')
     .build();

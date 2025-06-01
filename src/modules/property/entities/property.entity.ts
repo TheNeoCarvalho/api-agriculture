@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { Producer } from '../../producer/entities/producer.entity';
 import { Crop } from '../../crop/entities/crop.entity';
+import { Plot } from 'src/modules/plot/entities/plot.entity';
 
 @Entity()
 export class Property {
@@ -36,4 +37,8 @@ export class Property {
 
     @OneToMany(() => Crop, (crop) => crop.property)
     crops: Crop[];
+
+    @OneToMany(() => Plot, (plot) => plot.property, { cascade: true })
+    plots: Plot[];
+
 }
