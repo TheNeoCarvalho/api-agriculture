@@ -13,11 +13,11 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity('crops')
 export class Crop {
     @PrimaryGeneratedColumn('uuid')
-    @ApiProperty({ description: 'The unique identifier of the crop' })
+    @ApiProperty({ description: 'O Id da plantação' })
     id: string;
 
     @Column()
-    @ApiProperty({ description: 'The name of the crop' })
+    @ApiProperty({ description: 'O nome da plantação' })
     name: string;
 
     @ManyToOne(() => Property, (property) => property.crops)

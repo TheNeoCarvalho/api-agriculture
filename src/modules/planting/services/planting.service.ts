@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Planting } from '../entities/planting.entity';
@@ -10,6 +10,9 @@ import { Season } from '../../season/entities/season.entity';
 
 @Injectable()
 export class PlantingService {
+
+    private readonly logger = new Logger(PlantingService.name);
+
     constructor(
         @InjectRepository(Planting)
         private readonly plantingRepository: Repository<Planting>,
@@ -27,12 +30,16 @@ export class PlantingService {
     async create(dto: CreatePlantingDto): Promise<Planting> {
         const plot = await this.plotRepository.findOne({ where: { id: dto.plotId } });
         if (!plot) throw new NotFoundException('Plot não encontrado');
+        this.logger.log('Plot com id: ${dto.plotId} encontrado')
 
         const crop = await this.cropRepository.findOne({ where: { id: dto.cropId } });
         if (!crop) throw new NotFoundException('Crop não encontrado');
+        this.logger.log('Crop com id: ${dto.cropId} encontrado')
+
 
         const season = await this.seasonRepository.findOne({ where: { id: dto.seasonId } });
         if (!season) throw new NotFoundException('Season não encontrado');
+        this.logger.log('Season com id: ${dto.seasonId} encontrado')
 
         const planting = this.plantingRepository.create({
             plot,
@@ -41,16 +48,19 @@ export class PlantingService {
             plantedArea: dto.plantedArea,
         });
 
+        this.logger.log('Planting criado: ${JSON.stringify(planting)}')
         return this.plantingRepository.save(planting);
     }
 
     findAll(): Promise<Planting[]> {
+        this.logger.log('Encontrando todos os plantings')
         return this.plantingRepository.find();
     }
 
     async findOne(id: string): Promise<Planting> {
         const planting = await this.plantingRepository.findOne({ where: { id } });
         if (!planting) throw new NotFoundException('Planting não encontrado');
+        this.logger.log('Planting com id: ${id} encontrado')
         return planting;
     }
 
@@ -79,11 +89,13 @@ export class PlantingService {
             planting.plantedArea = dto.plantedArea;
         }
 
+        this.logger.log('Planting atualizado: ${JSON.stringify(planting)}')
         return this.plantingRepository.save(planting);
     }
 
     async remove(id: string): Promise<void> {
         const planting = await this.findOne(id);
         await this.plantingRepository.remove(planting);
+        this.logger.log('Planting removido com sucesso')
     }
 }

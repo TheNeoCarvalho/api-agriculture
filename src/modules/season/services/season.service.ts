@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { CreateSeasonDto } from '../dto/create-season.dto';
 import { UpdateSeasonDto } from '../dto/update-season.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,6 +7,9 @@ import { Season } from '../entities/season.entity';
 
 @Injectable()
 export class SeasonService {
+
+    private readonly logger = new Logger(SeasonService.name);
+
     constructor(
         @InjectRepository(Season)
         private readonly seasonRepository: Repository<Season>,
@@ -14,10 +17,12 @@ export class SeasonService {
 
     async create(createSeasonDto: CreateSeasonDto): Promise<Season> {
         const season = this.seasonRepository.create(createSeasonDto);
+        this.logger.log('Season criada: ${JSON.stringify(season)}');
         return this.seasonRepository.save(season);
     }
 
     async findAll(): Promise<Season[]> {
+        this.logger.log('Buscando todas as estações');
         return this.seasonRepository.find();
     }
 
@@ -26,17 +31,20 @@ export class SeasonService {
         if (!season) {
             throw new NotFoundException(`Season com id: ${id} não encontrado`);
         }
+        this.logger.log('Season encontrada: ${JSON.stringify(season)}');
         return season;
     }
 
     async update(id: string, updateSeasonDto: UpdateSeasonDto): Promise<Season> {
         const season = await this.findOne(id);
         const updated = this.seasonRepository.merge(season, updateSeasonDto);
+        this.logger.log('Season atualizada: ${JSON.stringify(updated)}');
         return this.seasonRepository.save(updated);
     }
 
     async remove(id: string): Promise<void> {
         const season = await this.findOne(id);
         await this.seasonRepository.remove(season);
+        this.logger.log('Season removida com sucesso');
     }
 }

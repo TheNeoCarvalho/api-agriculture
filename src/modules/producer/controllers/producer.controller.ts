@@ -10,10 +10,18 @@ import {
 import { ProducerService } from '../services/producer.service';
 import { CreateProducerDto } from '../dto/create-producer.dto';
 import { UpdateProducerDto } from '../dto/update-producer.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
+
 
 @Controller('producers')
 @ApiTags('Producers')
+@ApiResponse({ status: 200, description: 'Producers criado com sucesso' })
+@ApiResponse({ status: 400, description: 'Erro ao criar producer' })
+@ApiResponse({ status: 500, description: 'Erro interno do servidor' })
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class ProducerController {
     constructor(private readonly service: ProducerService) { }
 

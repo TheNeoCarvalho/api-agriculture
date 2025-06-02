@@ -6,14 +6,21 @@ import {
     Param,
     Patch,
     Delete,
+    UseGuards,
 } from '@nestjs/common';
 import { PlantingService } from '../services/planting.service';
 import { CreatePlantingDto } from '../dto/create-planting.dto';
 import { UpdatePlantingDto } from '../dto/update-planting.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 
 @Controller('plantings')
 @ApiTags('Plantings')
+@ApiResponse({ status: 200, description: 'Plantings criado com sucesso' })
+@ApiResponse({ status: 400, description: 'Erro ao criar planting' })
+@ApiResponse({ status: 500, description: 'Erro interno do servidor' })
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class PlantingController {
     constructor(private readonly service: PlantingService) { }
 

@@ -1,11 +1,18 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
 import { CropService } from '../services/crop.service';
 import { CreateCropDto } from '../dto/create-crop.dto';
 import { UpdateCropDto } from '../dto/update-crop.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { Crop } from '../entities/crop.entity';
 
 @Controller('crops')
 @ApiTags('Crops')
+@ApiResponse({ status: 200, description: 'Cultivo criado com sucesso' })
+@ApiResponse({ status: 400, description: 'Erro ao criar Cultivo' })
+@ApiResponse({ status: 500, description: 'Erro interno do servidor' })
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class CropController {
     constructor(private readonly cropService: CropService) { }
 
@@ -15,21 +22,28 @@ export class CropController {
     }
 
     @Get()
+    @ApiResponse({ status: 200, description: 'Cultivos encontrados com sucesso', type: Crop, isArray: true })
     findAll() {
         return this.cropService.findAll();
     }
 
     @Get(':id')
+    @ApiResponse({ status: 200, description: 'Cultivo encontrada com sucesso', type: Crop })
+    @ApiResponse({ status: 404, description: 'Cultivo não encontrado' })
     findOne(@Param('id') id: string) {
         return this.cropService.findOne(id);
     }
 
     @Patch(':id')
+    @ApiResponse({ status: 200, description: 'Cultivo atualizada com sucesso', type: Crop })
+    @ApiResponse({ status: 404, description: 'Cultivo não encontrado' })
     update(@Param('id') id: string, @Body() updateCropDto: UpdateCropDto) {
         return this.cropService.update(id, updateCropDto);
     }
 
     @Delete(':id')
+    @ApiResponse({ status: 200, description: 'Cultivo removida com sucesso' })
+    @ApiResponse({ status: 404, description: 'Cultivo não encontrado' })
     remove(@Param('id') id: string) {
         return this.cropService.remove(id);
     }

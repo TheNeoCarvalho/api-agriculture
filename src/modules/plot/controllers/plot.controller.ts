@@ -1,11 +1,17 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { PlotService } from '../services/plot.service';
 import { CreatePlotDto } from '../dto/create-plot.dto';
 import { UpdatePlotDto } from '../dto/update-plot.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 
 @Controller('plots')
 @ApiTags('Plots')
+@ApiResponse({ status: 200, description: 'Plots criado com sucesso' })
+@ApiResponse({ status: 400, description: 'Erro ao criar plot' })
+@ApiResponse({ status: 500, description: 'Erro interno do servidor' })
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class PlotController {
     constructor(private readonly plotService: PlotService) { }
 

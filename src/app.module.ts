@@ -14,10 +14,14 @@ import { SeasonModule } from './modules/season/season.module';
 import { PlantingModule } from './modules/planting/planting.module';
 import { ProducerModule } from './modules/producer/producer.module';
 import { PropertyModule } from './modules/property/property.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forRoot({
       ...typeOrmConfig,
       entities: [Producer, Crop, Season, Property, Plot, Planting]
@@ -28,6 +32,8 @@ import { PropertyModule } from './modules/property/property.module';
     PlantingModule,
     ProducerModule,
     PropertyModule,
+    UserModule,
+    AuthModule,
   ],
 })
 
