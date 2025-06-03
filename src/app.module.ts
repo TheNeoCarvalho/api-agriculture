@@ -17,15 +17,23 @@ import { PropertyModule } from './modules/property/property.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { PassportModule } from '@nestjs/passport';
+import { User } from './modules/user/entities/user.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    TypeOrmModule.forRoot({
-      ...typeOrmConfig,
-      entities: [Producer, Crop, Season, Property, Plot, Planting]
-    }),
+    TypeOrmModule.forRoot(
+      {
+        type: 'postgres',
+        url: 'postgresql://neondb_owner:npg_HkFUZs80ORIl@ep-nameless-mountain-a47x5nd6-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require',
+        ssl: {
+          rejectUnauthorized: false,
+        },
+        autoLoadEntities: true,
+        synchronize: true,
+        entities: [Producer, Crop, Season, Property, Plot, Planting, User]
+      }),
     AuthModule,
     UserModule,
     ProducerModule,
