@@ -8,15 +8,6 @@ primary_region = 'gig'
 
 [build]
 
-[env]
-  DATABASE_HOST=postgres
-  DATABASE_PORT=5432
-  DATABASE_USERNAME=agriculture
-  DATABASE_PASSWORD=agriculture
-  DATABASE_NAME=agriculture
-  JWT_SECRET_KEY=20132006df45aae3602581bf57715ff88f07f46fbaf2b9039c30ff
-  JWT_EXPIRATION_TIME=3600
-
 [http_service]
   internal_port = 3000
   force_https = true
