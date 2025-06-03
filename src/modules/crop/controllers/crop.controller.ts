@@ -23,26 +23,27 @@ export class CropController {
 
     @Get()
     @ApiResponse({ status: 200, description: 'Cultivos encontrados com sucesso', type: Crop, isArray: true })
+    @ApiResponse({ status: 404, description: 'Nenhum cultivo encontrado' })
     findAll() {
         return this.cropService.findAll();
     }
 
     @Get(':id')
-    @ApiResponse({ status: 200, description: 'Cultivo encontrada com sucesso', type: Crop })
+    @ApiResponse({ status: 200, description: 'Cultivo encontrado com sucesso', type: Crop })
     @ApiResponse({ status: 404, description: 'Cultivo não encontrado' })
     findOne(@Param('id') id: string) {
         return this.cropService.findOne(id);
     }
 
     @Patch(':id')
-    @ApiResponse({ status: 200, description: 'Cultivo atualizada com sucesso', type: Crop })
+    @ApiResponse({ status: 200, description: 'Cultivo atualizado com sucesso', type: Crop })
     @ApiResponse({ status: 404, description: 'Cultivo não encontrado' })
     update(@Param('id') id: string, @Body() updateCropDto: UpdateCropDto) {
         return this.cropService.update(id, updateCropDto);
     }
 
     @Delete(':id')
-    @ApiResponse({ status: 200, description: 'Cultivo removida com sucesso' })
+    @ApiResponse({ status: 200, description: 'Cultivo removido com sucesso' })
     @ApiResponse({ status: 404, description: 'Cultivo não encontrado' })
     remove(@Param('id') id: string) {
         return this.cropService.remove(id);

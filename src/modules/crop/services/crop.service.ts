@@ -36,37 +36,37 @@ export class CropService {
             season,
         });
 
-        this.logger.log('Criando plantação');
+        this.logger.log('Criando cultivo');
         this.logger.log(JSON.stringify(crop));
 
         return this.cropRepository.save(crop);
     }
 
     async findAll(): Promise<Crop[]> {
-        this.logger.log('Encontrando todas as plantações')
+        this.logger.log('Encontrando todos os cultivos')
         return this.cropRepository.find();
     }
 
     async findOne(id: string): Promise<Crop> {
         const crop = await this.cropRepository.findOne({ where: { id } });
         if (!crop) {
-            this.logger.log('plantação com id: ${id} não encontrado')
-            throw new NotFoundException(`plantação com id: ${id} não encontrado`);
+            this.logger.log('cultivo com id: ${id} não encontrado')
+            throw new NotFoundException(`cultivo com id: ${id} não encontrado`);
         }
-        this.logger.log('plantação com id: ${id} encontrado')
+        this.logger.log('cultivo com id: ${id} encontrado')
         return crop;
     }
 
     async update(id: string, updateCropDto: UpdateCropDto): Promise<Crop> {
         const crop = await this.findOne(id);
         const updated = Object.assign(crop, updateCropDto);
-        this.logger.log('Atualizando plantação: ${JSON.stringify(updated)}')
+        this.logger.log('Atualizando cultivo')
         return this.cropRepository.save(updated);
     }
 
     async remove(id: string): Promise<void> {
         const crop = await this.findOne(id);
         await this.cropRepository.remove(crop);
-        this.logger.log('plantação removida com sucesso')
+        this.logger.log('cultivo removida com sucesso')
     }
 }

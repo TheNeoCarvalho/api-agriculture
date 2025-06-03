@@ -14,19 +14,19 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity('plantings')
 export class Planting {
     @PrimaryGeneratedColumn('uuid')
-    @ApiProperty({ description: 'The unique identifier of the planting' })
+    @ApiProperty({ description: 'O Id da plantaçãeo' })
     id: string;
 
     @Column({ type: 'float' })
-    @ApiProperty({ description: 'The area of the planting' })
+    @ApiProperty({ description: 'A área plantada' })
     plantedArea: number;
 
     @CreateDateColumn()
-    @ApiProperty({ description: 'The creation date of the planting' })
+    @ApiProperty({ description: 'A data da criação da plantação' })
     createdAt: Date;
 
     @UpdateDateColumn()
-    @ApiProperty({ description: 'The update date of the planting' })
+    @ApiProperty({ description: 'A data da atualiza~ção da plantação' })
     updatedAt: Date;
 
     @ManyToOne(() => Plot, plot => plot.plantings, { eager: true })

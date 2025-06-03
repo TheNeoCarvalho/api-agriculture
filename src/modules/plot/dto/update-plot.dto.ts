@@ -3,7 +3,7 @@ import { CreatePlotDto } from './create-plot.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdatePlotDto extends PartialType(CreatePlotDto) {
-    @ApiProperty({ description: 'The name of the plot' })
+    @ApiProperty({ description: 'O nome do Tahão' })
     name: string;
 
     @ApiProperty({ description: 'The area of the plot' })

@@ -4,7 +4,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class CreateCropDto {
     @IsString()
     @IsNotEmpty()
-    @ApiProperty({ description: 'O nome da plantação' })
+    @ApiProperty({ description: 'O nome do cultivo' })
     name: string;
 
     @IsString()

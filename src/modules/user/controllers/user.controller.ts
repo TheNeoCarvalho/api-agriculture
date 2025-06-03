@@ -7,7 +7,7 @@ import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { User } from '../entities/user.entity';
 
 @Controller('users')
-@ApiTags('users')
+@ApiTags('Users')
 @ApiResponse({ status: 200, description: 'Usuário criado com sucesso' })
 @ApiResponse({ status: 400, description: 'Erro ao criar usuário' })
 @ApiResponse({ status: 500, description: 'Erro interno do servidor' })

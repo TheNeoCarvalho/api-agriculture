@@ -3,9 +3,9 @@ import { CreateCropDto } from './create-crop.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateCropDto extends PartialType(CreateCropDto) {
-    @ApiProperty({ description: 'O nome da plantação' })
+    @ApiProperty({ description: 'O nome do cultivo' })
     name: string;
 
-    @ApiProperty({ description: 'A descrição da plantação' })
+    @ApiProperty({ description: 'A descrição do cultivo' })
     description: string;
 }

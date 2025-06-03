@@ -29,17 +29,17 @@ export class PlantingService {
 
     async create(dto: CreatePlantingDto): Promise<Planting> {
         const plot = await this.plotRepository.findOne({ where: { id: dto.plotId } });
-        if (!plot) throw new NotFoundException('Plot não encontrado');
-        this.logger.log('Plot com id: ${dto.plotId} encontrado')
+        if (!plot) throw new NotFoundException('Talhão não encontrado');
+        this.logger.log('Talhão com id: ${dto.plotId} encontrado')
 
         const crop = await this.cropRepository.findOne({ where: { id: dto.cropId } });
-        if (!crop) throw new NotFoundException('Crop não encontrado');
-        this.logger.log('Crop com id: ${dto.cropId} encontrado')
+        if (!crop) throw new NotFoundException('Cultivo não encontrado');
+        this.logger.log('Cultivo com id: ${dto.cropId} encontrado')
 
 
         const season = await this.seasonRepository.findOne({ where: { id: dto.seasonId } });
-        if (!season) throw new NotFoundException('Season não encontrado');
-        this.logger.log('Season com id: ${dto.seasonId} encontrado')
+        if (!season) throw new NotFoundException('Safra não encontrada');
+        this.logger.log('Safra com id: ${dto.seasonId} encontrada')
 
         const planting = this.plantingRepository.create({
             plot,
@@ -48,19 +48,19 @@ export class PlantingService {
             plantedArea: dto.plantedArea,
         });
 
-        this.logger.log('Planting criado: ${JSON.stringify(planting)}')
+        this.logger.log('Plantação criada com sucesso')
         return this.plantingRepository.save(planting);
     }
 
     findAll(): Promise<Planting[]> {
-        this.logger.log('Encontrando todos os plantings')
+        this.logger.log('Encontrando todas as plantações')
         return this.plantingRepository.find();
     }
 
     async findOne(id: string): Promise<Planting> {
         const planting = await this.plantingRepository.findOne({ where: { id } });
-        if (!planting) throw new NotFoundException('Planting não encontrado');
-        this.logger.log('Planting com id: ${id} encontrado')
+        if (!planting) throw new NotFoundException('Plantação não encontrada');
+        this.logger.log('Plantação com id: ${id} encontrado')
         return planting;
     }
 
@@ -69,19 +69,19 @@ export class PlantingService {
 
         if (dto.plotId) {
             const plot = await this.plotRepository.findOne({ where: { id: dto.plotId } });
-            if (!plot) throw new NotFoundException('Plot não encontrado');
+            if (!plot) throw new NotFoundException('Talhão não encontrado');
             planting.plot = plot;
         }
 
         if (dto.cropId) {
             const crop = await this.cropRepository.findOne({ where: { id: dto.cropId } });
-            if (!crop) throw new NotFoundException('Crop não encontrado');
+            if (!crop) throw new NotFoundException('Cultivo não encontrado');
             planting.crop = crop;
         }
 
         if (dto.seasonId) {
             const season = await this.seasonRepository.findOne({ where: { id: dto.seasonId } });
-            if (!season) throw new NotFoundException('Season não encontrado');
+            if (!season) throw new NotFoundException('Safra não encontrado');
             planting.season = season;
         }
 
@@ -89,13 +89,13 @@ export class PlantingService {
             planting.plantedArea = dto.plantedArea;
         }
 
-        this.logger.log('Planting atualizado: ${JSON.stringify(planting)}')
+        this.logger.log('Plantação atualizada')
         return this.plantingRepository.save(planting);
     }
 
     async remove(id: string): Promise<void> {
         const planting = await this.findOne(id);
         await this.plantingRepository.remove(planting);
-        this.logger.log('Planting removido com sucesso')
+        this.logger.log('Plantação removida com sucesso')
     }
 }
