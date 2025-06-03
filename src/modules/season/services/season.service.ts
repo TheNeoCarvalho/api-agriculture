@@ -17,34 +17,34 @@ export class SeasonService {
 
     async create(createSeasonDto: CreateSeasonDto): Promise<Season> {
         const season = this.seasonRepository.create(createSeasonDto);
-        this.logger.log('Season criada: ${JSON.stringify(season)}');
+        this.logger.log('Safra criada');
         return this.seasonRepository.save(season);
     }
 
     async findAll(): Promise<Season[]> {
-        this.logger.log('Buscando todas as estações');
+        this.logger.log('Buscando todas as Safras');
         return this.seasonRepository.find();
     }
 
     async findOne(id: string): Promise<Season> {
         const season = await this.seasonRepository.findOneBy({ id });
         if (!season) {
-            throw new NotFoundException(`Season com id: ${id} não encontrado`);
+            throw new NotFoundException(`Safras com id: ${id} não encontrado`);
         }
-        this.logger.log('Season encontrada: ${JSON.stringify(season)}');
+        this.logger.log('Safra encontrada');
         return season;
     }
 
     async update(id: string, updateSeasonDto: UpdateSeasonDto): Promise<Season> {
         const season = await this.findOne(id);
         const updated = this.seasonRepository.merge(season, updateSeasonDto);
-        this.logger.log('Season atualizada: ${JSON.stringify(updated)}');
+        this.logger.log('Safra atualizada');
         return this.seasonRepository.save(updated);
     }
 
     async remove(id: string): Promise<void> {
         const season = await this.findOne(id);
         await this.seasonRepository.remove(season);
-        this.logger.log('Season removida com sucesso');
+        this.logger.log('Safras removida com sucesso');
     }
 }

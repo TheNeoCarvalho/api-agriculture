@@ -32,7 +32,7 @@ export class PlotService {
             property,
         });
 
-        this.logger.log('Talhão criado: ${JSON.stringify(plot)}')
+        this.logger.log('Talhão criado')
 
         return this.plotRepo.save(plot);
     }
@@ -50,14 +50,14 @@ export class PlotService {
     async update(id: string, dto: UpdatePlotDto) {
         const plot = await this.plotRepo.preload({ id, ...dto });
         if (!plot) throw new NotFoundException('Talhão não encontrado');
-        this.logger.log('Talhão atualizado: ${JSON.stringify(plot)}');
+        this.logger.log('Talhão atualizado');
         return this.plotRepo.save(plot);
     }
 
     async remove(id: string) {
         const plot = await this.findOne(id);
         if (!plot) throw new NotFoundException('Talhão não encontrado');
-        this.logger.log('Talhão removido: ${JSON.stringify(plot)}');
+        this.logger.log('Talhão removido');
         return this.plotRepo.remove(plot);
     }
 }

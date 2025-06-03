@@ -6,11 +6,11 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity('seasons')
 export class Season {
     @PrimaryGeneratedColumn('uuid')
-    @ApiProperty({ description: 'The unique identifier of the season' })
+    @ApiProperty({ description: 'O id da Safra' })
     id: string;
 
     @Column()
-    @ApiProperty({ description: 'The name of the season' })
+    @ApiProperty({ description: 'O nome da Safra' })
     name: string;
 
     @OneToMany(() => Crop, (crop) => crop.season)

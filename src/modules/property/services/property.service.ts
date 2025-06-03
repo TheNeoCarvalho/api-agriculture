@@ -20,7 +20,7 @@ export class PropertyService {
     ) { }
 
     async create(dto: CreatePropertyDto): Promise<Property> {
-        this.logger.log('Criando propriedade: ${JSON.stringify(dto)}');
+        this.logger.log('Criando propriedade');
 
         const sum = dto.agricultureArea + dto.vegetationArea;
         if (sum > dto.totalArea) {
@@ -43,7 +43,7 @@ export class PropertyService {
             producer,
         });
 
-        this.logger.log('Propriedade criada: ${JSON.stringify(property)}');
+        this.logger.log('Propriedade criada');
         return this.propertyRepository.save(property);
     }
 
@@ -60,7 +60,7 @@ export class PropertyService {
 
         if (!property) throw new NotFoundException('Propriedade não encontrada');
 
-        this.logger.log('Propriedade encontrada: ${JSON.stringify(property)}');
+        this.logger.log('Propriedade encontrada');
 
         return property;
     }
@@ -71,6 +71,7 @@ export class PropertyService {
         if (dto.agricultureArea !== undefined && dto.vegetationArea !== undefined && dto.totalArea !== undefined) {
             const sum = dto.agricultureArea + dto.vegetationArea;
             if (sum > dto.totalArea) {
+                this.logger.error('Soma das áreas excede a área total da fazenda');
                 throw new BadRequestException(
                     'A soma das áreas agricultável e de vegetação não pode exceder a área total da fazenda.',
                 );
@@ -78,9 +79,10 @@ export class PropertyService {
         }
 
         Object.assign(property, dto);
-        this.logger.log('Propriedade atualizada: ${JSON.stringify(property)}');
+        this.logger.log('Propriedade atualizada');
         return this.propertyRepository.save(property);
     }
+
     async remove(id: string): Promise<void> {
         const property = await this.findOne(id);
         await this.propertyRepository.remove(property);

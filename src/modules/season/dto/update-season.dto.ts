@@ -3,6 +3,6 @@ import { CreateSeasonDto } from './create-season.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateSeasonDto extends PartialType(CreateSeasonDto) {
-    @ApiProperty({ description: 'The name of the season' })
+    @ApiProperty({ description: 'O nome da Safra' })
     name: string;
 }

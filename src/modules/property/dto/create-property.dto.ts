@@ -10,39 +10,39 @@ import {
 export class CreatePropertyDto {
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ description: 'The name of the property' })
+    @ApiProperty({ description: 'O nome da Propriedade' })
     name: string;
 
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ description: 'The city of the property' })
+    @ApiProperty({ description: 'A cidade da Propriedade' })
     city: string;
 
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ description: 'The state of the property' })
+    @ApiProperty({ description: 'O estad da Propriedade' })
     state: string;
 
     @IsNotEmpty()
     @IsNumber()
     @Min(0)
-    @ApiProperty({ description: 'The total area of the property' })
+    @ApiProperty({ description: 'O total da área da Propriedade' })
     totalArea: number;
 
     @IsNotEmpty()
     @IsNumber()
     @Min(0)
-    @ApiProperty({ description: 'The agriculture area of the property' })
+    @ApiProperty({ description: 'A área agrícola da propriedade' })
     agricultureArea: number;
 
     @IsNotEmpty()
     @IsNumber()
     @Min(0)
-    @ApiProperty({ description: 'The vegetation area of the property' })
+    @ApiProperty({ description: 'A área de vegetação da propriedade' })
     vegetationArea: number;
 
     @IsNotEmpty()
     @IsUUID()
-    @ApiProperty({ description: 'The producer id of the property' })
+    @ApiProperty({ description: 'O ID do produtor da propriedade' })
     producerId: string;
 }

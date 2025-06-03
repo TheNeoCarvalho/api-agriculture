@@ -3,19 +3,19 @@ import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 
 export class CreateUserDto {
     @IsNotEmpty()
-    @ApiProperty({ description: 'The name of the user' })
+    @ApiProperty({ description: 'O nome do Usuário' })
     name: string;
 
     @IsNotEmpty()
-    @ApiProperty({ description: 'The username of the user' })
+    @ApiProperty({ description: 'O username do Usuário' })
     username: string;
 
     @IsEmail()
-    @ApiProperty({ description: 'The email of the user' })
+    @ApiProperty({ description: 'O email do Usuário' })
     email: string;
 
     @IsNotEmpty()
     @MinLength(6)
-    @ApiProperty({ description: 'The password of the user' })
+    @ApiProperty({ description: 'A senha do Usuário' })
     password: string;
 }

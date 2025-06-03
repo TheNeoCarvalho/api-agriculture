@@ -4,6 +4,6 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class CreateSeasonDto {
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ description: 'The name of the season' })
+    @ApiProperty({ description: 'O nome da Safra' })
     name: string;
 }

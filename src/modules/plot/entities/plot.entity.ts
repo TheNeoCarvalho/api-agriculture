@@ -1,19 +1,19 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Property } from '../../property/entities/property.entity';
-import { Planting } from 'src/modules/planting/entities/planting.entity';
+import { Planting } from '../../planting/entities/planting.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Plot {
-    @ApiProperty({ description: 'The unique identifier of the plot' })
+    @ApiProperty({ description: 'O id do Talhão' })
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @ApiProperty({ description: 'The name of the plot' })
+    @ApiProperty({ description: 'O nome do Talhão' })
     @Column()
     name: string;
 
-    @ApiProperty({ description: 'The area of the plot' })
+    @ApiProperty({ description: 'A área do Talhão' })
     @Column('float')
     area: number;
 

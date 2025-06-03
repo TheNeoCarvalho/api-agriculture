@@ -7,37 +7,37 @@ import {
 } from 'typeorm';
 import { Producer } from '../../producer/entities/producer.entity';
 import { Crop } from '../../crop/entities/crop.entity';
-import { Plot } from 'src/modules/plot/entities/plot.entity';
+import { Plot } from '../../plot/entities/plot.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Property {
     @PrimaryGeneratedColumn('uuid')
-    @ApiProperty({ description: 'The unique identifier of the property' })
+    @ApiProperty({ description: 'O id da Propriedade' })
     id: string;
 
     @Column()
-    @ApiProperty({ description: 'The name of the property' })
+    @ApiProperty({ description: 'O nome da Propriedade' })
     name: string;
 
     @Column()
-    @ApiProperty({ description: 'The city of the property' })
+    @ApiProperty({ description: 'A cidade da Propriedade' })
     city: string;
 
     @Column()
-    @ApiProperty({ description: 'The state of the property' })
+    @ApiProperty({ description: 'O estatdo da Propriedade' })
     state: string;
 
     @Column('float')
-    @ApiProperty({ description: 'The total area of the property' })
+    @ApiProperty({ description: 'O total da área da Propriedade' })
     totalArea: number;
 
     @Column('float')
-    @ApiProperty({ description: 'The agriculture area of the property' })
+    @ApiProperty({ description: 'A área agrícola da propriedade' })
     agricultureArea: number;
 
     @Column('float')
-    @ApiProperty({ description: 'The vegetation area of the property' })
+    @ApiProperty({ description: 'A área de vegetação da propriedade' })
     vegetationArea: number;
 
     @ManyToOne(() => Producer, (producer) => producer.properties)

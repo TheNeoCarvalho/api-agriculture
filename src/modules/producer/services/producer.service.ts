@@ -22,7 +22,7 @@ export class ProducerService {
         }
 
         const producer = this.producerRepository.create(dto);
-        this.logger.log('Produtor criado: ${JSON.stringify(producer)}');
+        this.logger.log('Produtor criado com sucesso');
         return this.producerRepository.save(producer);
     }
 
@@ -41,7 +41,7 @@ export class ProducerService {
     async update(id: string, dto: UpdateProducerDto): Promise<Producer> {
         const producer = await this.findOne(id);
         Object.assign(producer, dto);
-        this.logger.log('Produtor atualizado: ${JSON.stringify(producer)}');
+        this.logger.log('Produtor atualizado com sucesso');
         return this.producerRepository.save(producer);
     }
 

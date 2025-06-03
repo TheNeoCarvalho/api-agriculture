@@ -5,15 +5,15 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 export class Producer {
     @PrimaryGeneratedColumn('uuid')
-    @ApiProperty({ description: 'The unique identifier of the producer' })
+    @ApiProperty({ description: 'O id do Produtor' })
     id: string;
 
     @Column({ unique: true })
-    @ApiProperty({ description: 'The document of the producer' })
+    @ApiProperty({ description: 'O documento do Produtor' })
     document: string;
 
     @Column()
-    @ApiProperty({ description: 'The name of the producer' })
+    @ApiProperty({ description: 'O nome do Produtor' })
     name: string;
 
     @OneToMany(() => Property, (property) => property.producer)
