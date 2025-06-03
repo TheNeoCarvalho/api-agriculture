@@ -23,17 +23,10 @@ import { User } from './modules/user/entities/user.entity';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    TypeOrmModule.forRoot(
-      {
-        type: 'postgres',
-        url: 'postgresql://neondb_owner:npg_HkFUZs80ORIl@ep-nameless-mountain-a47x5nd6-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require',
-        ssl: {
-          rejectUnauthorized: false,
-        },
-        autoLoadEntities: true,
-        synchronize: true,
-        entities: [Producer, Crop, Season, Property, Plot, Planting, User]
-      }),
+    TypeOrmModule.forRoot({
+      ...typeOrmConfig,
+      entities: [Producer, Crop, Season, Property, Plot, Planting, User]
+    }),
     AuthModule,
     UserModule,
     ProducerModule,
