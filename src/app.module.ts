@@ -26,14 +26,14 @@ import { PassportModule } from '@nestjs/passport';
       ...typeOrmConfig,
       entities: [Producer, Crop, Season, Property, Plot, Planting]
     }),
-    PlotModule,
-    CropModule,
-    SeasonModule,
-    PlantingModule,
+    AuthModule,
+    UserModule,
     ProducerModule,
     PropertyModule,
-    UserModule,
-    AuthModule,
+    SeasonModule,
+    PlantingModule,
+    PlotModule,
+    CropModule,
   ],
 })
 
