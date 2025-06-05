@@ -25,9 +25,12 @@ async function bootstrap() {
     .setDescription('API para gestão de produtores rurais')
     .setVersion('1.0')
     .addTag('Auth', 'Endpoints de autenticação')
+    .addTag('Users', 'Endpoints de gerenciamento de usuários')
     .addTag('Producers', 'Endpoints de gerenciamento de produtores')
     .addTag('Properties', 'Endpoints de gerenciamento de propriedades')
     .addTag('Seasons', 'Endpoints de gerenciamento de safras')
+    .addTag('Crops', 'Endpoints de gerenciamento de culturas')
+    .addTag('Plantings', 'Endpoints de gerenciamento de plantios')
     .addBearerAuth()
     .build();
 

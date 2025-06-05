@@ -1,12 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import { ConfigService } from '@nestjs/config';
-import { User } from '../modules/user/entities/user.entity';
-import { Crop } from '../modules/crop/entities/crop.entity';
-import { Property } from '../modules/property/entities/property.entity';
-import { Season } from '../modules/season/entities/season.entity';
-import { Planting } from '../modules/planting/entities/planting.entity';
-import { Producer } from '../modules/producer/entities/producer.entity';
 
 dotenv.config();
 
@@ -21,5 +15,4 @@ export const typeOrmConfig = (
     database: process.env.DATABASE_NAME,
     autoLoadEntities: true,
     synchronize: true,
-    entities: [Producer, Crop, Season, Planting, Property, User]
 });
