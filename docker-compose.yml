@@ -28,7 +28,7 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
     volumes:
       - .:/usr/src/app
-    command: npm run start:dev
+    command: npm run start:watch
 
 volumes:
   pgdata:
