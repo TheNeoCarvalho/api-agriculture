@@ -7,10 +7,9 @@ import {
 } from 'typeorm';
 import { Producer } from '../../producer/entities/producer.entity';
 import { Crop } from '../../crop/entities/crop.entity';
-import { Plot } from '../../plot/entities/plot.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
-@Entity()
+@Entity('properties')
 export class Property {
     @PrimaryGeneratedColumn('uuid')
     @ApiProperty({ description: 'O id da Propriedade' })
@@ -45,8 +44,5 @@ export class Property {
 
     @OneToMany(() => Crop, (crop) => crop.property)
     crops: Crop[];
-
-    @OneToMany(() => Plot, (plot) => plot.property, { cascade: true })
-    plots: Plot[];
 
 }

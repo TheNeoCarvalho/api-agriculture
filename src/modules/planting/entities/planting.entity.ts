@@ -6,7 +6,6 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { Plot } from '../../plot/entities/plot.entity';
 import { Crop } from '../../crop/entities/crop.entity';
 import { Season } from '../../season/entities/season.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -28,9 +27,6 @@ export class Planting {
     @UpdateDateColumn()
     @ApiProperty({ description: 'A data da atualiza~ção da plantação' })
     updatedAt: Date;
-
-    @ManyToOne(() => Plot, plot => plot.plantings, { eager: true })
-    plot: Plot;
 
     @ManyToOne(() => Crop, crop => crop.plantings, { eager: true })
     crop: Crop;

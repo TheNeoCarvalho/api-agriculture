@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Property } from '../../property/entities/property.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
-@Entity()
+@Entity('producers')
 export class Producer {
     @PrimaryGeneratedColumn('uuid')
     @ApiProperty({ description: 'O id do Produtor' })

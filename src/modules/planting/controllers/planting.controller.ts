@@ -12,7 +12,7 @@ import { PlantingService } from '../services/planting.service';
 import { CreatePlantingDto } from '../dto/create-planting.dto';
 import { UpdatePlantingDto } from '../dto/update-planting.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 
 @Controller('plantings')
 @ApiTags('Plantings')

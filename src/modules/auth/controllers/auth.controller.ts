@@ -5,7 +5,7 @@ import { LoginDto } from './dtos/login.dto';
 import { RegisterDto } from './dtos/register.dto';
 
 @Controller('auth')
-@ApiTags('Auth')
+@ApiTags('Auth', 'Autenticação e Registro de Usuários')
 @ApiResponse({ status: 500, description: 'Erro interno do servidor' })
 export class AuthController {
     constructor(private authService: AuthService) { }

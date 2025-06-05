@@ -3,7 +3,7 @@ import { CropService } from '../services/crop.service';
 import { CreateCropDto } from '../dto/create-crop.dto';
 import { UpdateCropDto } from '../dto/update-crop.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { Crop } from '../entities/crop.entity';
 
 @Controller('crops')

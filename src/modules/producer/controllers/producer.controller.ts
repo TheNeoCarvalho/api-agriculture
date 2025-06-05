@@ -12,7 +12,7 @@ import { CreateProducerDto } from '../dto/create-producer.dto';
 import { UpdateProducerDto } from '../dto/update-producer.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 
 
 @Controller('producers')

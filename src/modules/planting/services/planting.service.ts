@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Planting } from '../entities/planting.entity';
 import { CreatePlantingDto } from '../dto/create-planting.dto';
 import { UpdatePlantingDto } from '../dto/update-planting.dto';
-import { Plot } from '../../plot/entities/plot.entity';
 import { Crop } from '../../crop/entities/crop.entity';
 import { Season } from '../../season/entities/season.entity';
 
@@ -17,9 +16,6 @@ export class PlantingService {
         @InjectRepository(Planting)
         private readonly plantingRepository: Repository<Planting>,
 
-        @InjectRepository(Plot)
-        private readonly plotRepository: Repository<Plot>,
-
         @InjectRepository(Crop)
         private readonly cropRepository: Repository<Crop>,
 
@@ -28,9 +24,6 @@ export class PlantingService {
     ) { }
 
     async create(dto: CreatePlantingDto): Promise<Planting> {
-        const plot = await this.plotRepository.findOne({ where: { id: dto.plotId } });
-        if (!plot) throw new NotFoundException('Talhão não encontrado');
-        this.logger.log('Talhão com id: ${dto.plotId} encontrado')
 
         const crop = await this.cropRepository.findOne({ where: { id: dto.cropId } });
         if (!crop) throw new NotFoundException('Cultivo não encontrado');
@@ -42,7 +35,7 @@ export class PlantingService {
         this.logger.log('Safra com id: ${dto.seasonId} encontrada')
 
         const planting = this.plantingRepository.create({
-            plot,
+
             crop,
             season,
             plantedArea: dto.plantedArea,
@@ -66,12 +59,6 @@ export class PlantingService {
 
     async update(id: string, dto: UpdatePlantingDto): Promise<Planting> {
         const planting = await this.findOne(id);
-
-        if (dto.plotId) {
-            const plot = await this.plotRepository.findOne({ where: { id: dto.plotId } });
-            if (!plot) throw new NotFoundException('Talhão não encontrado');
-            planting.plot = plot;
-        }
 
         if (dto.cropId) {
             const crop = await this.cropRepository.findOne({ where: { id: dto.cropId } });
