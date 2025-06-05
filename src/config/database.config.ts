@@ -1,14 +1,10 @@
 import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 config();
 
 const configService = new ConfigService();
-
-const isCompiled = path.extname(fileURLToPath(import.meta.url)) === '.js';
 
 export default new DataSource({
     type: 'postgres',
@@ -18,8 +14,6 @@ export default new DataSource({
     password: configService.get('DATABASE_PASSWORD'),
     database: configService.get('DATABASE_NAME'),
     migrationsTableName: 'migrations',
-    synchronize: true,
-    logging: true,
-    entities: [isCompiled ? 'dist/**/*.entity.js' : 'src/**/*.entity.ts'],
-    migrations: [isCompiled ? 'dist/database/migrations/*.js' : 'src/database/migrations/*.ts'],
+    entities: ['dist/**/*.entity{.ts,.js}'],
+    migrations: ['dist/database/migrations/*{.ts,.js}'],
 });
