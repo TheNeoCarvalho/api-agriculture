@@ -1,4 +1,4 @@
-# 🌾 App Agriculture API
+# 🌾 Agriculture API
 
 API RESTful para gerenciamento de produtores rurais, propriedades, safras e culturas plantadas. Desenvolvida com NestJS, PostgreSQL, Prisma ORM e Docker.
 
@@ -14,6 +14,84 @@ API RESTful para gerenciamento de produtores rurais, propriedades, safras e cult
   - Área total, agricultável e de vegetação (com validações)
 - Cadastro de safras (ex.: Safra 2021, Safra 2022)
 - Registro de culturas por safra e por propriedade
+
+---
+
+## Arquitetura
+
+O projeto segue uma arquitetura modular baseada nos princípios do NestJS:
+
+### Padrões Utilizados
+- **Modular**: Cada funcionalidade principal é um módulo independente
+- **MVC (Model-View-Controller)**: Separação clara entre modelos (entities), controladores e serviços
+- **DTO Pattern**: Objetos de transferência de dados para validação e tipagem
+- **Dependency Injection**: Injeção de dependências para melhor acoplamento
+- **Guard Pattern**: Proteção de rotas usando JWT Guards
+
+---
+
+### Estrutura de Camadas
+```
+└── src/
+    │
+    ├── modules/
+    |   └── auth/                      # Módulo de Autenticação
+    │        ├── dtos/               # Data Transfer Objects
+    │        ├── guards/             # JWT Guards
+    │        ├── strategies/         # Estratégias de autenticação
+    │        ├── controllers/        # Controlador de autenticação
+    |        ├── services/           # Serviço de autenticação
+    │        └── auth.module.ts      # Módulo de autenticação
+    |   
+    ├── producers/             # Módulo de Produtores
+    │       ├── dto/           # DTOs de produtores
+    │       ├── entities/      # Entidades do TypeORM
+    │       ├── controllers/
+    │       ├── services/
+    │       └── producers.module.ts
+    │
+    ├── crop/                  # Módulo de Produtores
+    │       ├── dto/           # DTOs de cultivos
+    │       ├── entities/      # Entidades do TypeORM
+    │       ├── conntrollers/
+    │       ├── services/
+    │       └── crop.module.ts
+    |
+    ├── planting/              # Módulo de Plantações
+    │       ├── dto/           # DTOs de Plantações
+    │       ├── entities/      # Entidades do TypeORM
+    │       ├── controllers/
+    │       ├── services/
+    │       └── planting.module.ts
+    |
+    ├── property/              # Módulo de Propriedades
+    │       ├── dto/           # DTOs de Propriedades
+    │       ├── entities/      # Entidades do TypeORM
+    │       ├── controllers/
+    │       ├── services/
+    │       └── property.module.ts
+    |
+    ├── season/                # Módulo de Safras
+    │       ├── dto/           # DTOs de Safras
+    │       ├── entities/      # Entidades do TypeORM
+    │       ├── controllers/
+    │       ├── services/
+    │       └── season.module.ts
+    |
+    ├── user/                  # Módulo de Usuários
+    │       ├── dto/           # DTOs de Usuários
+    │       ├── entities/      # Entidades do TypeORM
+    │       ├── controllers/
+    │       ├── services/
+    │       └── user.module.ts
+    |
+    ├── config/                 # Configurações da aplicação
+    │   ├── typeorm.config.ts   # Configuração do TypeORM
+    │   └── database.config.ts   # Configuração das migrations
+    │
+    └── database/
+        └── migrations/        # Migrations do TypeORM
+```
 
 ---
 
