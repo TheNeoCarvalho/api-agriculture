@@ -35,7 +35,7 @@ O projeto segue uma arquitetura modular baseada nos princípios do NestJS:
 └── src/
     │
     ├── modules/
-    |   └── auth/                      # Módulo de Autenticação
+    |   └── auth/                    # Módulo de Autenticação
     │        ├── dtos/               # Data Transfer Objects
     │        ├── guards/             # JWT Guards
     │        ├── strategies/         # Estratégias de autenticação
@@ -87,7 +87,7 @@ O projeto segue uma arquitetura modular baseada nos princípios do NestJS:
     |
     ├── config/                 # Configurações da aplicação
     │   ├── typeorm.config.ts   # Configuração do TypeORM
-    │   └── database.config.ts   # Configuração das migrations
+    │   └── database.config.ts  # Configuração das migrations
     │
     └── database/
         └── migrations/        # Migrations do TypeORM
@@ -120,8 +120,8 @@ O projeto segue uma arquitetura modular baseada nos princípios do NestJS:
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/TheNeoCarvalho/app-agriculture.git
-cd app-agriculture
+git clone https://github.com/TheNeoCarvalho/api-agriculture.git
+cd api-agriculture
 ```
 
 ### 2. Copie o arquivo de variáveis ambiente
@@ -135,15 +135,10 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-Rode as migrações do Prisma
-```bash
-docker exec -it app-agriculture-api npx prisma migrate deploy
-```
-
 ## Acessando a aplicação
-API: http://localhost:3000/api
+API: http://localhost:3000/
 
-Documentação Swagger: http://localhost:3000/api/docs
+Documentação Swagger: http://localhost:3000/api
 
 ## Testes
 
@@ -153,16 +148,6 @@ yarn test
 # ou
 npm run test
 ```
-
-#### API versionada com Swagger
-
-#### Logs estruturados com Logger
-
-#### Testes unitários
-
-#### Separação por módulos/domínios
-
-#### DTOs e validações com class-validator
 
 ## Autor
 Francisco Manoel Carvalho 
